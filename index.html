@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Task FE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="left">
+            <div class="item" draggable="true"> <h2 class="text">Item 1</h2> </div>
+            <div class="item" draggable="true"> <h2 class="text">Item 2</h2></div>
+            <div class="item" draggable="true"> <h2 class="text">Item 3</h2> </div>
+            <div class="item" draggable="true"> <h2 class="text">Item 4</h2> </div>
+
+        </div>
+        <div id="right">
+
+        </div>
+
+    </div>
+
+    <script>
+        let x = document.getElementsByClassName("item") ;//storing elements in array 
+        let leftbox = document.getElementById("left")
+        let rightbox = document.getElementById("right");
+
+        for(item of x){                                  //for mapping all elements in the arr 
+            item.addEventListener("dragstart", function(e) {   //dragging starts from here
+                let selected = e.target;                      // jisko drag kiya that item is selected
+
+                //dragging from left to right
+                rightbox.addEventListener("dragover", function(e) { //dragging stops to next box
+                    e.preventDefault();
+                });
+
+                rightbox.addEventListener("drop", function(e) {
+                   // rightbox.appendChild(e.target);
+                   rightbox.appendChild(selected);
+                    selected = null;    //after adding selected item value is equal to null so that other item can be selected
+            });
+        
+ 
+            //dragging from right to left
+            leftbox.addEventListener("dragover", function(e) { //dragging stops to next box
+                e.preventDefault();
+            });
+
+            leftbox.addEventListener("drop", function(e) {
+                //leftbox.appendChild(e.target);
+             leftbox.appendChild(selected);
+                selected = null;    //after adding selected item value is equal to null so that other item can be selected
+       });
+    })
+        
+    }
+        
+    </script>
+</body>
+</html>
